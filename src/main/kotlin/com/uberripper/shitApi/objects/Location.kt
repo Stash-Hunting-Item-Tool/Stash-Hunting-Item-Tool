@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 
 @Document
 data class Location(
-    var locX: Int = 0,
-    var locY: Int = 0,
-    var locAddress: String = "",
+    var locX: Double = 0.0,
+    var locY: Double = 0.0,
+    var locAddress: String?
 )
