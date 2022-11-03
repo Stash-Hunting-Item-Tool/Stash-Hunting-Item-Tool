@@ -27,8 +27,14 @@ class ItemController(private val itemModel: ItemModel) {
     }
 
     @GetMapping("/getAllWithName")
-    fun getAllWithName(@RequestParam(name = "name") address: String): ResponseEntity<List<Items>> {
-        val items = itemModel.findAllByName(address)
+    fun getAllWithName(@RequestParam(name = "name") name: String): ResponseEntity<List<Items>> {
+        val items = itemModel.findAllByName(name)
+        return ResponseEntity.ok(items)
+    }
+    @GetMapping("/getAllAtLocationWithName")
+    fun getAllWithName(@RequestParam(name = "address") address: String,
+                       @RequestParam(name = "name") name: String): ResponseEntity<List<Items>> {
+        val items = itemModel.findAllByLocationLocAddressAndName(address, name)
         return ResponseEntity.ok(items)
     }
 

@@ -14,5 +14,8 @@ interface ItemRepo : MongoRepository<Items, String> {
     @Query("{'location.locAddress' : '?0'}")
     fun findAllByLocationLocAddress(address: String): List<Items>
 
+    @Query("{'name': '?0', 'location.locAddress' : '?1'}")
+    fun findAllByLocationLocAddressAndName(address: String, name: String): List<Items>
+
     override fun deleteAll()
 }

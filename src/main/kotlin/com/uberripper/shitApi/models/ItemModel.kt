@@ -46,4 +46,9 @@ class ItemModel(private val itemRepo: ItemRepo) {
 
         return itemRepo.findAllByLocationLocAddress(locAddress)
     }
+
+    fun findAllByLocationLocAddressAndName(locAddress: String, name: String): List<Items> {
+
+        return itemRepo.findAllByLocationLocAddressAndName(locAddress, name)
+    }
 }
