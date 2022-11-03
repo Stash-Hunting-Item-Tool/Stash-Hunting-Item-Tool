@@ -17,7 +17,7 @@ class ItemController (private val itemModel: ItemModel) {
 
     @GetMapping("/getAll")
     fun getAll(): ResponseEntity<List<Items>> {
-        val patients = itemModel.findAllItems()
-        return ResponseEntity.ok(patients)
+        val items = itemModel.findAllItems()
+        return ResponseEntity.ok(items)
     }
 }
