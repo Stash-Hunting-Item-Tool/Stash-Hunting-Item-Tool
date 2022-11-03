@@ -7,9 +7,9 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document
 data class Items(
     @Id
-    val id: ObjectId = ObjectId.get(),
+    var id: ObjectId = ObjectId.get(),
     var name: String = "",
     var comment: String = "",
-    var qty: Int,
+    var qty: Int?,
     var location: Location? // null if the stash is gone. We're cheap on memory!
 )
