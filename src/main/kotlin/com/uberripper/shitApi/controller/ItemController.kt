@@ -5,6 +5,8 @@ import com.uberripper.shitApi.objects.Items
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.server.ResponseStatusException
+
 
 @RestController
 class ItemController(private val itemModel: ItemModel) {
@@ -60,6 +62,16 @@ class ItemController(private val itemModel: ItemModel) {
     ): ResponseEntity<Items> {
         val newItem = itemModel.updateItem(id, item)
         return ResponseEntity.ok(newItem)
+    }
 
+    @GetMapping("/getFromId")
+    fun getFromId(@RequestParam(name = "id") id: String): ResponseEntity<Items> {
+        val items = itemModel.findById(id)
+        if (items == null){
+            throw ResponseStatusException(
+                HttpStatus.NOT_FOUND, "item not found"
+            )
+        }
+        return ResponseEntity.ok(items)
     }
 }

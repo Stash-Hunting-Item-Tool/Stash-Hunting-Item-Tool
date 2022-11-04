@@ -51,4 +51,11 @@ class ItemModel(private val itemRepo: ItemRepo) {
 
         return itemRepo.findAllByLocationLocAddressAndName(locAddress, name)
     }
+
+    fun findById(id: String): Items? {
+        if(itemRepo.existsById(id)) {
+            return itemRepo.findOneById(ObjectId(id))
+        }
+        return null
+    }
 }
