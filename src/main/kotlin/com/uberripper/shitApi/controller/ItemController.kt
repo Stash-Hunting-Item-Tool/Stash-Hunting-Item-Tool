@@ -1,4 +1,4 @@
-package com.uberripper.shitApi.controller;
+package com.uberripper.shitApi.controller
 
 import com.uberripper.shitApi.models.ItemModel
 import com.uberripper.shitApi.objects.Items
