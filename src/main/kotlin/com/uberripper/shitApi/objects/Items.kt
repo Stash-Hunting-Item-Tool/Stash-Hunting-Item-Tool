@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document
 data class Items(
     @Id
-    var id: ObjectId = ObjectId.get(),
+    var id: String = ObjectId.get().toHexString(),
     var name: String = "",
     var comment: String = "",
     var qty: Int?,
