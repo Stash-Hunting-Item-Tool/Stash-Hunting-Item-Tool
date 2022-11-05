@@ -24,8 +24,10 @@ class ItemModel(private val itemRepo: ItemRepo) {
     fun updateItem(
         id: String,
         newItem: Items
-    ): Items {
-
+    ): Items? {
+        if(!itemRepo.existsById(id)) {
+            return null
+        }
         val item = itemRepo.findOneById(ObjectId(id))
         newItem.id = item.id
 
@@ -57,5 +59,14 @@ class ItemModel(private val itemRepo: ItemRepo) {
             return itemRepo.findOneById(ObjectId(id))
         }
         return null
+    }
+
+    fun changeItemQty(id: String, qty: Int): Items?{
+        if(!itemRepo.existsById(id)) {
+            return null
+        }
+        val item = itemRepo.findOneById(ObjectId(id))
+        item.qty = item.qty?.minus(qty)
+        return updateItem(id, item)
     }
 }

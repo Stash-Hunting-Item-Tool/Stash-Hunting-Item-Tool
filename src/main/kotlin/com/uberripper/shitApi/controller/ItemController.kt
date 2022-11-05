@@ -45,8 +45,8 @@ class ItemController(private val itemModel: ItemModel) {
 
     @PostMapping("/addItem")
     fun addItem(@RequestBody item: Items): ResponseEntity<Items> {
-        val item = itemModel.addItem(item)
-        return ResponseEntity(item, HttpStatus.CREATED)
+        val newItem = itemModel.addItem(item)
+        return ResponseEntity(newItem, HttpStatus.CREATED)
     }
 
     @PostMapping("/deleteItem")
@@ -67,11 +67,27 @@ class ItemController(private val itemModel: ItemModel) {
     @GetMapping("/getFromId")
     fun getFromId(@RequestParam(name = "id") id: String): ResponseEntity<Items> {
         val items = itemModel.findById(id)
-        if (items == null){
-            throw ResponseStatusException(
+            ?: throw ResponseStatusException(
                 HttpStatus.NOT_FOUND, "item not found"
             )
-        }
         return ResponseEntity.ok(items)
     }
+
+    @GetMapping("/changeItemQty")
+    fun changeItemQty(
+        @RequestParam(name = "id") id: String,
+        @RequestParam(
+            name = "qty",
+            required = false,
+            defaultValue = "1"
+        ) qty: Int
+    ): ResponseEntity<Items> {
+
+        val items = itemModel.changeItemQty(id, qty)
+            ?: throw ResponseStatusException(
+                HttpStatus.NOT_FOUND, "item not found"
+            )
+        return ResponseEntity.ok(items)
+    }
+
 }
